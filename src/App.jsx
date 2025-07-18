@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import MovieForm from './components/MovieForm/MovieForm';
 import MovieCard from './components/MovieCard/MovieCard';
+import Modal from './components/Modal/Modal';
 import { useMoviesCrud } from './hooks/useMoviesCrud';
 
 function App() {
@@ -13,30 +15,42 @@ function App() {
 		handleEdit,
 	} = useMoviesCrud();
 
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	const openForm = (movie = null) => {
+		handleEdit(movie); // actualiza selectedMovie
+		setIsModalOpen(true);
+	};
+
+	const closeForm = () => {
+		handleEdit(null); // limpia el formulario
+		setIsModalOpen(false);
+	};
+
 	return (
-		<div>
+		<div className="app">
 			<h1>Películas Favoritas</h1>
 
-			<div ref={formRef}>
+			<button onClick={() => openForm()} style={{ marginBottom: '1rem' }}>
+				Agregar película
+			</button>
+
+			<Modal isOpen={isModalOpen} onClose={closeForm}>
 				<MovieForm
-					onSubmit={selectedMovie ? updateMovie : addMovie}
+					onSubmit={(movie) => {
+						selectedMovie ? updateMovie(movie) : addMovie(movie);
+						closeForm();
+					}}
 					selectedMovie={selectedMovie}
 				/>
-			</div>
+			</Modal>
 
-			<div
-				style={{
-					display: 'flex',
-					flexWrap: 'wrap',
-					gap: '1rem',
-					marginTop: '2rem',
-				}}
-			>
+			<div className="movies-container">
 				{movies.map((movie) => (
 					<MovieCard
 						key={movie.id}
 						movie={movie}
-						onEdit={handleEdit}
+						onEdit={openForm}
 						onDelete={deleteMovie}
 					/>
 				))}

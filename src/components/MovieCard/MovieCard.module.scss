@@ -1,58 +1,80 @@
 .movie-card {
+  width: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #fdfdfd;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  background-color: #11212D;
-  color: #CCD0CF;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  transition: transform 0.3s ease;
-  max-width: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
-    transform: scale(1.02);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
   }
-}
 
-.movie-card__image {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-}
+  &__image {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+  }
 
-.movie-card__content {
-  padding: 1rem;
-}
+  &__content {
+    padding: 1rem 0.8rem;
+    text-align: center;
+    background-color: #ffffff;
+    flex-grow: 1;
+  }
 
-.movie-card__title {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  color: #9BA8AB;
-}
+  &__title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    color: #2c3e50;
+  }
 
-.movie-card__info {
-  font-size: 0.9rem;
-  margin: 0.3rem 0;
-}
+  &__info {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.4rem;
+  }
 
-.movie-card__buttons {
-  margin-top: 1rem;
-  display: flex;
-  gap: 0.5rem;
-}
+  &__buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
 
-.movie-card__buttons button {
-  flex: 1;
-  padding: 0.4rem;
-  font-size: 0.9rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  background-color: #253745;
-  color: #CCD0CF;
-  transition: background-color 0.3s;
+    button {
+      flex: 1;
+      padding: 0.5rem 0.6rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
 
-  &:hover {
-    background-color: #4A5C6A;
+    button:first-of-type {
+      background-color: #154463;
+      color: white;
+
+      &:hover {
+        background-color: #2980b9;
+        transform: scale(1.05);
+      }
+    }
+
+    button:last-of-type {
+      background-color: #962f23;
+      color: white;
+
+      &:hover {
+        background-color: #c0392b;
+        transform: scale(1.05);
+      }
+    }
   }
 }
