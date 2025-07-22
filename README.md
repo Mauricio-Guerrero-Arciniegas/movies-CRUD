@@ -1,17 +1,18 @@
-# 👤 CRUD de Usuarios - React + Vite
+# CRUD de Usuarios - React + Vite
 
-Este proyecto es una aplicación web que permite **Crear, Leer, Actualizar y Eliminar (CRUD)** usuarios consumiendo una API externa. Fue desarrollado como parte de un reto técnico para Academlo.
+Este proyecto es una aplicación web que permite **Crear, Leer, Actualizar y Eliminar (CRUD)** peliculas consumiendo una API con Json. Fue desarrollado como parte de un reto técnico para Academlo.
 
-## 🚀 Tecnologías utilizadas
+## Tecnologías utilizadas
 
 - React
 - Vite
 - Axios
 - React Hook Form
 - CSS Modules / SCSS
-- SweetAlert2 (opcional para modales de confirmación)
+- Children
+- Json server
 
-## 🎯 Funcionalidades principales
+## Funcionalidades principales
 
 - Visualización de usuarios en tarjetas
 - Crear nuevos usuarios desde un formulario controlado
@@ -23,6 +24,6 @@ Este proyecto es una aplicación web que permite **Crear, Leer, Actualizar y Eli
 ## 🔧 Custom Hook: `useUsersCrud.js`
 
 Se creó un custom hook que encapsula las peticiones a la API:
-```js
+db.json corriendo en el puerto 4000
 // Ejemplo
 const { users, getAllUsers, createUser, updateUser, deleteUser } = useUsersCrud();# movies-CRUD

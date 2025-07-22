@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MovieForm from './components/MovieForm/MovieForm';
 import MovieCard from './components/MovieCard/MovieCard';
 import Modal from './components/Modal/Modal';
 import NotificationModal from './components/NotificationModal/NotificationModal';
 import { useMoviesCrud } from './hooks/useMoviesCrud';
+import LoaderM from './components/LoaderM/LoaderM';
 
 import styles from './App.module.scss';
 
@@ -20,6 +21,12 @@ function App() {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [notification, setNotification] = useState('');
 	const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		const timer = setTimeout(() => setIsLoading(false), 4000);
+		return () => clearTimeout(timer);
+	}, []);
 
 	const showNotification = (message) => {
 		setNotification(message);
@@ -39,16 +46,21 @@ function App() {
 		setIsModalOpen(false);
 	};
 
+	if (isLoading) return <LoaderM />;
+
 	return (
 		<div className={styles.app}>
 			<h1>CRUD DE PELICULAS</h1>
-			<h2>Agrega tu favorita !</h2>
+			<h2>¡Agrega tu favorita!</h2>
 
 			<button className={styles.button} onClick={() => openForm()}>
 				+ Agregar película
 			</button>
 
-			<NotificationModal isOpen={isNotificationOpen} onClose={() => setIsNotificationOpen(false)}>
+			<NotificationModal
+				isOpen={isNotificationOpen}
+				onClose={() => setIsNotificationOpen(false)}
+			>
 				<p>{notification}</p>
 			</NotificationModal>
 
@@ -57,7 +69,7 @@ function App() {
 					onSubmit={(movie) => {
 						if (selectedMovie) {
 							updateMovie(movie);
-							showNotification('🎬 Película actualizada');
+							showNotification('✅ Película actualizada');
 						} else {
 							addMovie(movie);
 							showNotification('✅ Película agregada');

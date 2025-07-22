@@ -57,7 +57,8 @@
       "releaseYear": 1999,
       "genre": "Sci-Fi",
       "rating": 8.7,
-      "image_url": "https://m.media-amazon.com/images/I/51vpnbwFHrL._AC_.jpg"
+      "image_url": "https://m.media-amazon.com/images/I/51vpnbwFHrL._AC_.jpg",
+      "comments": ""
     },
     {
       "id": "7",

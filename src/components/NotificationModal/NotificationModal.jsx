@@ -12,14 +12,14 @@ function NotificationModal({ isOpen, children, onClose, duration = 3000 }) {
 			setShouldRender(true);
 			showTimer = setTimeout(() => {
 				setVisible(true);
-			}, 10); 
+			}, 10);
 			hideTimer = setTimeout(() => {
 				setVisible(false);
-				
+
 				setTimeout(() => {
 					setShouldRender(false);
-					onClose(); 
-				}, 500); 
+					onClose();
+				}, 500);
 			}, duration);
 		} else {
 			setVisible(false);
@@ -36,7 +36,11 @@ function NotificationModal({ isOpen, children, onClose, duration = 3000 }) {
 
 	return (
 		<div className={styles.overlay}>
-			<div className={`${styles.modal} ${visible ? styles.fadeIn : styles.fadeOut}`}>
+			<div
+				className={`${styles.modal} ${
+					visible ? styles.fadeIn : styles.fadeOut
+				}`}
+			>
 				{children}
 			</div>
 		</div>

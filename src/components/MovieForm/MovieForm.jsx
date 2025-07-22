@@ -54,11 +54,7 @@ function MovieForm({ onSubmit, selectedMovie, clearSelected }) {
 				{...register('rating')}
 				required
 			/>
-			<textarea
-				placeholder="Comentarios"
-				{...register('comments')}
-				rows="3"
-			/>
+			<textarea placeholder="Comentarios" {...register('comments')} rows="3" />
 
 			<div className={styles['movie-form__buttons']}>
 				<button type="submit">
