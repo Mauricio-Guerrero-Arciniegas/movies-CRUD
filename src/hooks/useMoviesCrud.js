@@ -34,16 +34,6 @@ export function useMoviesCrud() {
 		}
 	};
 
-	// Eliminar película
-	const deleteMovie = async (id) => {
-		try {
-			await axios.delete(`http://localhost:4000/movies/${id}`);
-			setMovies((prev) => prev.filter((movie) => movie.id !== id));
-		} catch (error) {
-			console.error('Error al eliminar película:', error);
-		}
-	};
-
 	// Actualizar película
 	const updateMovie = async (updatedMovie) => {
 		try {
@@ -53,14 +43,24 @@ export function useMoviesCrud() {
 			);
 			setMovies((prev) =>
 				prev.map((movie) => (movie.id === updatedMovie.id ? res.data : movie)),
-			);
-			setSelectedMovie(null);
-		} catch (error) {
-			console.error('Error al actualizar película:', error);
-		}
-	};
+		);
+		setSelectedMovie(null);
+	} catch (error) {
+		console.error('Error al actualizar película:', error);
+	}
+};
 
-	// Dirigir al formulario al oprimir "Editar"
+// Eliminar película
+const deleteMovie = async (id) => {
+	try {
+		await axios.delete(`http://localhost:4000/movies/${id}`);
+		setMovies((prev) => prev.filter((movie) => movie.id !== id));
+	} catch (error) {
+		console.error('Error al eliminar película:', error);
+	}
+};
+
+// Dirigir al formulario al oprimir "Editar"
 	const handleEdit = (movie) => {
 		setSelectedMovie(movie);
 		if (formRef.current) {

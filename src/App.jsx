@@ -2,13 +2,15 @@ import { useState } from 'react';
 import MovieForm from './components/MovieForm/MovieForm';
 import MovieCard from './components/MovieCard/MovieCard';
 import Modal from './components/Modal/Modal';
+import NotificationModal from './components/NotificationModal/NotificationModal';
 import { useMoviesCrud } from './hooks/useMoviesCrud';
+
+import styles from './App.module.scss';
 
 function App() {
 	const {
 		movies,
 		selectedMovie,
-		formRef,
 		addMovie,
 		deleteMovie,
 		updateMovie,
@@ -16,42 +18,67 @@ function App() {
 	} = useMoviesCrud();
 
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [notification, setNotification] = useState('');
+	const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+
+	const showNotification = (message) => {
+		setNotification(message);
+		setIsNotificationOpen(true);
+		setTimeout(() => {
+			setIsNotificationOpen(false);
+		}, 2000);
+	};
 
 	const openForm = (movie = null) => {
-		handleEdit(movie); // actualiza selectedMovie
+		handleEdit(movie);
 		setIsModalOpen(true);
 	};
 
 	const closeForm = () => {
-		handleEdit(null); // limpia el formulario
+		handleEdit(null);
 		setIsModalOpen(false);
 	};
 
 	return (
-		<div className="app">
-			<h1>Películas Favoritas</h1>
+		<div className={styles.app}>
+			<h1>CRUD DE PELICULAS</h1>
+			<h2>Agrega tu favorita !</h2>
 
-			<button onClick={() => openForm()} style={{ marginBottom: '1rem' }}>
-				Agregar película
+			<button className={styles.button} onClick={() => openForm()}>
+				+ Agregar película
 			</button>
+
+			<NotificationModal isOpen={isNotificationOpen} onClose={() => setIsNotificationOpen(false)}>
+				<p>{notification}</p>
+			</NotificationModal>
 
 			<Modal isOpen={isModalOpen} onClose={closeForm}>
 				<MovieForm
 					onSubmit={(movie) => {
-						selectedMovie ? updateMovie(movie) : addMovie(movie);
+						if (selectedMovie) {
+							updateMovie(movie);
+							showNotification('🎬 Película actualizada');
+						} else {
+							addMovie(movie);
+							showNotification('✅ Película agregada');
+						}
 						closeForm();
 					}}
 					selectedMovie={selectedMovie}
+					clearSelected={closeForm}
 				/>
 			</Modal>
 
-			<div className="movies-container">
+			<div className={styles.moviesContainer}>
 				{movies.map((movie) => (
 					<MovieCard
 						key={movie.id}
 						movie={movie}
 						onEdit={openForm}
-						onDelete={deleteMovie}
+						onDelete={(id) => {
+							deleteMovie(id);
+							showNotification('🗑️ Película eliminada');
+						}}
 					/>
 				))}
 			</div>

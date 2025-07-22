@@ -2,7 +2,7 @@
   "movies": [
     {
       "id": "1",
-      "title": "The Shawshank Redemption",
+      "title": "The Shawshank Redemption.",
       "director": "Frank Darabont",
       "releaseYear": 1994,
       "genre": "Drama",
@@ -110,7 +110,7 @@
     },
     {
       "id": "7ed2",
-      "title": "Aliens",
+      "title": "Aliens.",
       "director": "Ridley Scott",
       "releaseYear": "1979",
       "genre": "Terror",
